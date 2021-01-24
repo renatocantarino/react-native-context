@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FlatList, Alert, View } from 'react-native'
 import { ListItem, Avatar } from 'react-native-elements'
-
-import users from '../data/users'
+import UsersContext from '../context/UserContext'
 
 export default props => {
-    
+
+    const { state } = useContext(UsersContext);
+
+
     function navegateUser(user) {
         props.navigation.navigate('User', user)
     }
@@ -44,7 +46,7 @@ export default props => {
         <View>
             <FlatList
                 keyExtractor={user => user.id.toString()}
-                data={users}
+                data={state.users}
                 renderItem={getUserItem} />
         </View>
     )
