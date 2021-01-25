@@ -5,7 +5,7 @@ import UsersContext from '../context/UserContext'
 
 export default props => {
 
-    const { state } = useContext(UsersContext);
+    const { state , dispatch } = useContext(UsersContext);
 
 
     function navegateUser(user) {
@@ -17,7 +17,10 @@ export default props => {
             {
                 text: 'Sim',
                 onPress() {
-                    console.warn(user.id)
+                    dispatch({
+                        type: 'deleteUser',
+                        payload: user
+                    })
                 }
             },
             {

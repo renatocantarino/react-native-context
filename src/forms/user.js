@@ -5,12 +5,13 @@ import { Input, Icon, Button, Avatar } from 'react-native-elements';
 
 export default ({ route, navigation }) => {
 
+    const { dispatch } = useContext(UsersContext);
     const [user, setUser] = useState(route.params ? route.params : {})
     //console.warn(Object.keys(props.route.params)); //investigar os paramteros que chegam
     return (
         <View style={style.form}>
             <Avatar
-               containerStyle={{marginLeft:115 , marginTop: 20 , marginBottom: 15}}
+                containerStyle={{ marginLeft: 115, marginTop: 20, marginBottom: 15 }}
                 rounded
                 size="xlarge"
                 source={{
@@ -49,7 +50,14 @@ export default ({ route, navigation }) => {
             <Button
                 title="Salvar"
                 type="outline"
-                onPress={() => alert('press')}
+                onPress={() => {
+                    dispatch({
+                        type: user.id ? 'update' : 'create',
+                        payload: user
+                    })
+
+                    navigation.goBack()
+                }}
             />
 
 
